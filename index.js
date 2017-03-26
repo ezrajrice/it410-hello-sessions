@@ -38,7 +38,7 @@ app.use(passport.session());
 app.get('/', 
     function (req, res) {
         if (req.user) return res.send(req.user);
-        res.sendStatus(401);
+        return res.sendStatus(401);
     }
 );
 
@@ -69,7 +69,7 @@ app.get('/health',
 app.post('/login',
     passport.authenticate('local'),
     function(req, res) {
-        return res.send(req.user) + res.sendStatus(200);
+        return res.send(req.user);
     }
 );
 
@@ -77,7 +77,7 @@ app.post('/login',
 app.get('/logout',
     function(req, res) {
         req.logout();
-        return res.send({}) + res.sendStatus(200);
+        return res.send();
     }
 );
 
