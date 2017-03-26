@@ -45,7 +45,7 @@ app.get('/',
 app.put('/:key:val',
     function(req, res) {
         if (!req.user) return res.sendStatus(401);
-
+        req.user[key] = val;
         return res.send(req.user);
     }
 );
@@ -69,7 +69,7 @@ app.get('/health',
 app.post('/login',
     passport.authenticate('local'),
     function(req, res) {
-        return res.send(req.user);
+        return res.status(200).send(req.user);
     }
 );
 
@@ -77,7 +77,7 @@ app.post('/login',
 app.get('/logout',
     function(req, res) {
         req.logout();
-        return res.send();
+        return res.status(200).send();
     }
 );
 
