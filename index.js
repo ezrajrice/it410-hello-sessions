@@ -42,17 +42,15 @@ app.get('/',
     }
 );
 
-app.put('/',
-    (key, value),
+app.put('/:key:val',
     function(req, res) {
         if (!req.user) return res.sendStatus(401);
-        
+
         return res.send(req.user);
     }
 );
 
-app.delete('/',
-    key,
+app.delete('/:key',
     function(req, res) {
         if (!req.user) return res.sendStatus(401);
         delete req.user[key];
@@ -82,27 +80,6 @@ app.get('/logout',
         return res.send({}) + res.sendStatus(200);
     }
 );
-
-// specify a URL that only authenticated users can hit
-app.get('/protected',
-    function(req, res) {
-        if (!req.user) return res.sendStatus(401);
-        res.send('You have access.');
-    }
-);
-
-// specify the login url
-app.put('/auth',
-    passport.authenticate('local'),
-    function(req, res) {
-        res.send('You are authenticated, ' + req.user.username);
-    });
-
-// log the user out
-app.delete('/auth', function(req, res) {
-    req.logout();
-    res.send('You have logged out.');
-});
 
 // start the server listening
 app.listen(3000, function () {
