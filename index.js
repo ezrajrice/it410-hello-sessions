@@ -1,4 +1,5 @@
 'use strict';
+// http://james.darktech.org/api/grade/hello-sessions/ezrajrice/it410-hello-sessions
 // include modules
 var bodyParser          = require('body-parser');
 var cookieParser        = require('cookie-parser');
@@ -41,6 +42,24 @@ app.get('/',
     }
 );
 
+app.put('/',
+    (key, value),
+    function(req, res) {
+        if (!req.user) return res.sendStatus(401);
+        
+        return res.send(req.user);
+    }
+);
+
+app.delete('/',
+    key,
+    function(req, res) {
+        if (!req.user) return res.sendStatus(401);
+        delete req.user[key];
+        return res.send(req.user);
+    }
+);
+
 // Health endpoint
 app.get('/health',
     function(req, res) {
@@ -48,6 +67,7 @@ app.get('/health',
     }
 );
 
+// Login route
 app.post('/login',
     passport.authenticate('local'),
     function(req, res) {
@@ -55,6 +75,7 @@ app.post('/login',
     }
 );
 
+// Logout Route
 app.get('/logout',
     function(req, res) {
         req.logout();
