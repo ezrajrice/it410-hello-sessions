@@ -21,7 +21,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
     } else {
         users[username] = {password: password, pairs: {}};
     }
-    return done(null, false);
+    return done(null, { username: username });
 }));
 
 // tell passport how to turn a user into serialized data that will be stored with the session
