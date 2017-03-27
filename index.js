@@ -46,6 +46,7 @@ app.put('/:key:val',
     function(req, res) {
         if (!req.user) return res.sendStatus(401);
         req.authInfo[key] = val;
+        console.log(req.authInfo);
         return res.send(req.authInfo);
     }
 );
@@ -77,7 +78,6 @@ app.post('/login',
 app.get('/logout',
     function(req, res) {
         req.logout();
-        console.log(req.authInfo);
         return res.status(200).send(req.body);
     }
 );
