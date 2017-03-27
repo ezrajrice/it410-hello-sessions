@@ -44,6 +44,7 @@ app.get('/',
 
 app.put('/:key:val',
     function(req, res) {
+        console.log(req.user);
         if (!req.user) return res.sendStatus(401);
         req.authInfo[key] = val;
         console.log(req.authInfo);
