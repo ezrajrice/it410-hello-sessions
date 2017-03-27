@@ -37,7 +37,7 @@ app.use(passport.session());
 // home page
 app.get('/', 
     function (req, res) {
-        if (req.user) return res.send(req.user);
+        if (req.user) return res.send(req.authInfo);
         return res.sendStatus(401);
     }
 );
