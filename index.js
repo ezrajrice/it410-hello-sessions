@@ -65,7 +65,7 @@ app.delete('/',
         var key = req.query.key;
         var username = req.user.username;
         delete users[username].pairs[key];
-        return res.send(req.authInfo);
+        return res.send(users[username].pairs);
     }
 );
 
