@@ -44,7 +44,7 @@ app.get('/',
     }
 );
 
-app.put('/?key=:key&val=:value',
+app.put('/',
     function(req, res) {
         var key = req.params.key;
         var val = req.params.value;
