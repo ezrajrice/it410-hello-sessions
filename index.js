@@ -49,7 +49,7 @@ app.put('/',
         var key = req.query.key;
         var val = req.query.value;
         if (!req.user) return res.sendStatus(401);
-        console.log(req.authInfo);
+        console.log(req.user);
         req.authInfo.set(key, val);
         return res.send(req.authInfo);
     }
