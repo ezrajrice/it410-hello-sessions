@@ -44,7 +44,7 @@ app.get('/',
     }
 );
 
-app.put('/:key/:value',
+app.put('/?:key=:value',
     function(req, res) {
         console.log(req.params);
         var key = req.params.key;
@@ -56,7 +56,7 @@ app.put('/:key/:value',
     }
 );
 
-app.delete('/:key',
+app.delete('/?:key',
     function(req, res) {
         if (!req.user) return res.sendStatus(401);
         delete req.authInfo[key];
