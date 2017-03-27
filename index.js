@@ -44,11 +44,13 @@ app.get('/',
     }
 );
 
-app.put('/',
+app.put('/:key:value',
     function(req, res) {
+        var key = req.params.key;
+        var val = req.params.value;
         console.log(req.user);
         if (!req.user) return res.sendStatus(401);
-        // req.authInfo[key] = val;
+        req.authInfo[key] = val;
         console.log(req.authInfo);
         return res.send(req.authInfo);
     }
