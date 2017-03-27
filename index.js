@@ -86,6 +86,7 @@ app.post('/login',
         if (!users.username) {
             users[username] = {'password': password, 'pairs': {}};
         }
+        console.log(users);
         return res.status(200).send(users[username].pairs);
     }
 );
