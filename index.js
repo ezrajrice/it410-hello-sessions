@@ -45,16 +45,16 @@ app.get('/',
 app.put('/:key:val',
     function(req, res) {
         if (!req.user) return res.sendStatus(401);
-        req.user[key] = val;
-        return res.send(req.user);
+        req.authInfo[key] = val;
+        return res.send(req.authInfo);
     }
 );
 
 app.delete('/:key',
     function(req, res) {
         if (!req.user) return res.sendStatus(401);
-        delete req.user[key];
-        return res.send(req.user);
+        delete req.authInfo[key];
+        return res.send(req.authInfo);
     }
 );
 
@@ -69,7 +69,6 @@ app.get('/health',
 app.post('/login',
     passport.authenticate('local'),
     function(req, res) {
-        // console.log(req);
         return res.status(200).send(req.authInfo);
     }
 );
