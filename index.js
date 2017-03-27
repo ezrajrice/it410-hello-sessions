@@ -17,7 +17,9 @@ var app = express();
 // tell passport to use a local strategy and tell it how to validate a username and password
 passport.use(new LocalStrategy(function(username, password, done) {
     if (users[username] && users[username].password === password) {
-        return done(null, { username: username, password: password });
+        return done(null, { username: username });
+    } else {
+        users[username] = {password: password, pairs: {}};
     }
     return done(null, false);
 }));
@@ -84,11 +86,6 @@ app.post('/login',
     function(req, res) {
         console.log(users);
         var username = req.user.username;
-        var password = req.user.password;
-        // Create new user if not exist
-        if (!users.username) {
-            users[username] = {'password': password, 'pairs': {}};
-        }
         return res.status(200).send(users[username].pairs);
     }
 );
