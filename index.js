@@ -47,19 +47,19 @@ app.get('/',
 app.put('/',
     function(req, res) {
         console.log(req.query);
-        // var key = req.params.key;
-        // var val = req.params.value;
+        var key = req.query.key;
+        var val = req.query.value;
         if (!req.user) return res.sendStatus(401);
-        // req.authInfo[key] = val;
+        req.authInfo[key] = val;
         console.log(req.authInfo);
         return res.send(req.authInfo);
     }
 );
 
-app.delete('/?:key',
+app.delete('/',
     function(req, res) {
         if (!req.user) return res.sendStatus(401);
-        delete req.authInfo[key];
+        delete req.authInfo[req.query.key];
         return res.send(req.authInfo);
     }
 );
