@@ -37,7 +37,9 @@ app.use(passport.session());
 // home page
 app.get('/', 
     function (req, res) {
-        if (req.user) return res.send(req.authInfo);
+        if (req.user) {
+            return res.send(req.authInfo);
+        }
         return res.sendStatus(401);
     }
 );
@@ -71,6 +73,7 @@ app.get('/health',
 app.post('/login',
     passport.authenticate('local'),
     function(req, res) {
+        req.user.save();
         return res.status(200).send(req.authInfo);
     }
 );
