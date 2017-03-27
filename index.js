@@ -69,7 +69,7 @@ app.get('/health',
 app.post('/login',
     passport.authenticate('local'),
     function(req, res) {
-        console.log(req.user.data);
+        console.log(req);
         return res.status(200).send(req.user);
     }
 );
@@ -83,6 +83,4 @@ app.get('/logout',
 );
 
 // start the server listening
-app.listen(3000, function () {
-    console.log('Server listening on port 3000.');
-});
+app.listen(3000);
