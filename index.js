@@ -41,7 +41,8 @@ app.use(passport.session());
 app.get('/', 
     function (req, res) {
         if (req.user) {
-            return res.send(req.authInfo);
+            var username = req.user.username;
+            return res.send(users[username].pairs);
         }
         return res.sendStatus(401);
     }
