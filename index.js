@@ -8,6 +8,9 @@ var LocalStrategy       = require('passport-local').Strategy;
 var passport            = require('passport');
 var session             = require('express-session');
 
+// session db
+var users = {};
+
 // initialize express app
 var app = express();
 
@@ -46,19 +49,21 @@ app.get('/',
 
 app.put('/',
     function(req, res) {
+        if (!req.user) return res.sendStatus(401);
         var key = req.query.key;
         var val = req.query.value;
-        if (!req.user) return res.sendStatus(401);
-        console.log(req.user);
-        req.authInfo.set(key, val);
-        return res.send(req.authInfo);
+        var username = req.user.username;
+        users[username].pairs[key] = val;
+        return res.send(users[username].pairs);
     }
 );
 
 app.delete('/',
     function(req, res) {
         if (!req.user) return res.sendStatus(401);
-        delete req.authInfo[req.query.key];
+        var key = req.query.key;
+        var username = req.user.username;
+        delete users[username].pairs[key];
         return res.send(req.authInfo);
     }
 );
@@ -74,7 +79,13 @@ app.get('/health',
 app.post('/login',
     passport.authenticate('local'),
     function(req, res) {
-        return res.status(200).send(req.authInfo);
+        var username = req.user.username;
+        var password = req.user.password;
+        // Create new user if not exist
+        if (!users.username) {
+            users[username] = {'password': password, 'pairs': {}};
+        }
+        return res.status(200).send(users[username].pairs);
     }
 );
 
