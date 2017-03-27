@@ -46,12 +46,11 @@ app.get('/',
 
 app.put('/',
     function(req, res) {
-        console.log(req.query);
         var key = req.query.key;
         var val = req.query.value;
         if (!req.user) return res.sendStatus(401);
-        req.authInfo[key] = val;
         console.log(req.authInfo);
+        req.authInfo.set(key, val);
         return res.send(req.authInfo);
     }
 );
