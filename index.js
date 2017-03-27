@@ -69,8 +69,8 @@ app.get('/health',
 app.post('/login',
     passport.authenticate('local'),
     function(req, res) {
-        console.log(req);
-        return res.status(200).send(req.user);
+        // console.log(req);
+        return res.status(200).send(req.authInfo);
     }
 );
 
