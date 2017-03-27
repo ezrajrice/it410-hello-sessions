@@ -44,7 +44,7 @@ app.get('/',
     }
 );
 
-app.put('/:key:val',
+app.put('/',
     function(req, res) {
         console.log(req.user);
         if (!req.user) return res.sendStatus(401);
