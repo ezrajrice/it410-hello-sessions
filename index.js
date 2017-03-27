@@ -77,8 +77,8 @@ app.post('/login',
 app.get('/logout',
     function(req, res) {
         req.logout();
-        console.log(req.body);
-        return res.status(200).send({});
+        console.log(req.authInfo);
+        return res.status(200).send(req.body);
     }
 );
 
